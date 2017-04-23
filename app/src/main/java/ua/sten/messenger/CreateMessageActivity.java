@@ -22,9 +22,13 @@ public class CreateMessageActivity extends AppCompatActivity {
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ReceiveMessageActivity.class);
-                intent.putExtra(ReceiveMessageActivity.EXTRA_MESSAGE, message.getText().toString());
-                startActivity(intent);
+                //Intent intent = new Intent(getApplicationContext(), ReceiveMessageActivity.class);
+                //intent.putExtra(ReceiveMessageActivity.EXTRA_MESSAGE, message.getText().toString());
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, message.getText().toString());
+                Intent chosenIntent = Intent.createChooser(intent, getString(R.string.chooser));
+                startActivity(chosenIntent);
             }
         });
     }
